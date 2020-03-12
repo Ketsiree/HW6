@@ -1,0 +1,25 @@
+.Get{
+    border-radius: 10%;
+    border: 1px solid #d41ccb;
+    background: #d41ccb;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.Del{
+    border-radius: 10%;
+    border: 1px solid #0e590e;
+    background: #0e590e;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.Up{
+    border-radius: 10%;
+    border: 1px solid #089191;
+    background: #089191;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+    
+}
