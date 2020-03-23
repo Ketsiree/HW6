@@ -5,18 +5,18 @@ import './Student.css'
 export default () => {
 
     const [students, setStudents] = useState({})
-    const [id, setID] = useState('')
+    const [id, setId] = useState(null)
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [major, setMajor] = useState('')
-    const [gpa, setGpa] = useState(0)
+    const [gpa, setGpa] = useState(null)
 
     useEffect(() => {
             getStudents()
-            console.log('UseEffect is called')
+           // console.log('UseEffect is called')
     },[])
 
-    const getStudents = async () =>{
+    const getStudents = async () => {
         const result = await axios.get('http://localhost/api/students')
         console.log(result.data)
         setStudents(result.data)
@@ -36,8 +36,8 @@ export default () => {
 
     const getStudent = async (id) => {
         const result = await axios.get(`http://localhost/api/students/${id}`)
-        // console.log(result.data)
-        setID(result.data.id)
+        console.log(result.data.id)
+        setId(result.data.id)
         setName(result.data.name)
         setSurname(result.data.surname)
         setMajor(result.data.major)
@@ -52,6 +52,12 @@ export default () => {
                 major,
                 gpa
     })
+        setId(result.data.id)
+        setName(result.data.name)
+        setSurname(result.data.surname)
+        setMajor(result.data.major)
+        setGpa(result.data.gpa)
+        getStudent()
 }
 
     const delStudent = async (id) =>{
@@ -59,16 +65,23 @@ export default () => {
         getStudents()
     }
 
-    const printStudents = () =>{
+    const printStudents = () => {
         if(students && students.length)
         return students.map( (students,index)  => {
             return(
-                <li key= {index}>
-                    {students.id} : {students.name} : {students.surname} : {students.major} : {students.gpa}
+                <div>
+                key={index}
+                {/* </key>Students : {index+1} */}
+                    <p>ID :{students.id}</p>
+                    <p>Name : {students.name}</p>
+                    <p>Surname : {students.surname}</p>
+                    <p>Major : {students.major}</p>
+                    <p>GPA: {students.gpa}</p>
+                    
                     <button className="Get" onClick={() => getStudent(students.id)}>Get </button>
                     <button className="Del" onClick={() => delStudent(students.id)}>Delete </button>
                     <button className="Up" onClick={() => updateStudent(students.id)}>Update </button>
-                </li>
+                </div>
             )
         
         })
@@ -80,43 +93,43 @@ export default () => {
 return(
     <div>
     <ul>
-        { printStudents() }
+        {printStudents()}
     </ul>
     <h2>Add Student</h2>
     ID :
     <input 
-        placeholder="ID"
+        placeholder="Id"
         type="number"
         name="id"
-        onChange={ (e) => setID (e.target.value)}
+        onChange={ (e) => setId(e.target.value)}
         /> <br/>
     Name :
     <input 
         placeholder="Name"
         type="text"
         name="name"
-        onChange={ (e) => setName (e.target.value)}
+        onChange={ (e) => setName(e.target.value)}
         /> <br/>
     Surname :
     <input 
         placeholder="Surname"
         type="text"
         name="surname"
-        onChange={  (e) => setSurname (e.target.value)}
+        onChange={  (e) => setSurname(e.target.value)}
         /> <br/>
     Major :
     <input 
         placeholder="Major"
         type="text"
         name="major"
-        onChange={  (e) => setMajor (e.target.value)}
+        onChange={  (e) => setMajor(e.target.value)}
         /> <br/>
     GPA :
     <input 
         placeholder="GPA"
         type="number"
         name="gpa"
-        onChange={  (e) => setGpa (e.target.value)}
+        onChange={  (e) => setGpa(e.target.value)}
         /> <br/>
     
     <button onClick={addStudent}> Add </button>
