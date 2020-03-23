@@ -17,13 +17,13 @@ export default () => {
     },[])
 
     const getStudents = async () =>{
-        const result = await axios.get('http://localhost:8000/api/students')
+        const result = await axios.get('http://localhost/api/students')
         console.log(result.data)
         setStudents(result.data)
     }
 
     const addStudent = async () => {
-        const result = await axios.post(`http://localhost:8000/api/students`, {
+        const result = await axios.post(`http://localhost/api/students`, {
             id,
             name,
             surname,
@@ -35,8 +35,8 @@ export default () => {
     }
 
     const getStudent = async (id) => {
-        const result = await axios.get(`http://localhost:8000/api/students/${id}`)
-        console.log(result.data)
+        const result = await axios.get(`http://localhost/api/students/${id}`)
+        // console.log(result.data)
         setID(result.data.id)
         setName(result.data.name)
         setSurname(result.data.surname)
@@ -45,17 +45,17 @@ export default () => {
     }
 
     const updateStudent = async (id) =>{
-        const result = await axios.put(`http://localhost:8000/api/students/${id}`, {
+        const result = await axios.put(`http://localhost/api/students/${id}`, {
                 id,
                 name,
                 surname,
                 major,
                 gpa
     })
-    
+}
 
     const delStudent = async (id) =>{
-        const result = await axios.delete(`http://localhost:8000/api/students/${id}`)
+        const result = await axios.delete(`http://localhost/api/students/${id}`)
         getStudents()
     }
 
@@ -73,12 +73,12 @@ export default () => {
         
         })
         else{
-            return(<h2> No Student </h2>)
+            return(<h2>Hi</h2>)
         }
     }
 
 return(
-    <div>Student
+    <div>
     <ul>
         { printStudents() }
     </ul>
@@ -87,7 +87,7 @@ return(
     <input 
         placeholder="ID"
         type="number"
-        name="ID"
+        name="id"
         onChange={ (e) => setID (e.target.value)}
         /> <br/>
     Name :
@@ -100,7 +100,7 @@ return(
     Surname :
     <input 
         placeholder="Surname"
-        type="number"
+        type="text"
         name="surname"
         onChange={  (e) => setSurname (e.target.value)}
         /> <br/>
@@ -119,8 +119,8 @@ return(
         onChange={  (e) => setGpa (e.target.value)}
         /> <br/>
     
-    <button onClick={addStudent}> Add </button>}
+    <button onClick={addStudent}> Add </button>
     </div>
     )
   }
-}
+
