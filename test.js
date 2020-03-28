@@ -8,7 +8,7 @@ let router = express.Router()
 app.use('/api', bodyParser.json(), router); 
 app.use('/api', bodyParser.urlencoded({ extended: false }), router);
 
-let student = [
+let students = [
     {
         id: "6035512082",
         name: 'Peempos',
@@ -19,7 +19,7 @@ let student = [
     
 ];
 
-router.route('/Student')
+router.route('/Students')
     .get((req, res) => res.json(students))
     
     .post((req,res)=>{
@@ -34,7 +34,7 @@ router.route('/Student')
             res.json( {message: 'Student created!'} )
     })
 
-router.route('/Student/:student_id')
+router.route('/Students/:student_id')
     .get((req,res) => {
         let id = req.params.student_id
         let index = students.findIndex( student => (student.id === +id) )

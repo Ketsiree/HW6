@@ -17,13 +17,13 @@ export default () => {
     },[])
 
     const getStudents = async () => {
-        const result = await axios.get('http://localhost/api/students')
+        const result = await axios.get('http://localhost:8000/api/students')
         console.log(result.data)
         setStudents(result.data)
     }
 
     const addStudent = async () => {
-        const result = await axios.post(`http://localhost/api/students`, {
+        const result = await axios.post(`http://localhost:8000/api/students`, {
             id,
             name,
             surname,
@@ -35,7 +35,7 @@ export default () => {
     }
 
     const getStudent = async (id) => {
-        const result = await axios.get(`http://localhost/api/students/${id}`)
+        const result = await axios.get(`http://localhost:8000/api/students/${id}`)
         console.log(result.data.id)
         setId(result.data.id)
         setName(result.data.name)
@@ -45,7 +45,7 @@ export default () => {
     }
 
     const updateStudent = async (id) =>{
-        const result = await axios.put(`http://localhost/api/students/${id}`, {
+        const result = await axios.put(`http://localhost:8000/api/students/${id}`, {
                 id,
                 name,
                 surname,
@@ -61,7 +61,7 @@ export default () => {
 }
 
     const delStudent = async (id) =>{
-        const result = await axios.delete(`http://localhost/api/students/${id}`)
+        const result = await axios.delete(`http://localhost:8000/api/students/${id}`)
         getStudents()
     }
 
